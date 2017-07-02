@@ -1,0 +1,20 @@
+{
+  "name": "dbnl2ebook",
+  "version": "0.0.1",
+  "description": "",
+  "main": "d2e.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lukeart/dbnl2ebook.git"
+  },
+  "author": "lukeart",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lukeart/dbnl2ebook/issues"
+  },
+  "homepage": "https://github.com/lukeart/dbnl2ebook#readme",
+  "dependencies": {
+    "x-ray": "latest",
+    "url": "latest"
+  }
+}
