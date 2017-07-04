@@ -1,8 +1,6 @@
-//var he = require('he');
-var Xray = require('x-ray');
+const request = require('request');
+const cheerio = require('cheerio');
 var URL = require('url');
-
-var x = Xray();
 
 function scrapePage(url) {
 }
@@ -20,11 +18,14 @@ function mainloop(bookurl) {
     exit(1);
   }
 
-  x(bookurl,'article',[{
-    text: '#tekst_en_noten@html'
-  }])(function(err,obj) {
-    console.log(obj[0].text);
-  })
+  request(bookurl,
+    function(error,response,html) {
+      if (!error && response.statusCode == 200) {
+        console.log(html);
+        var $ = cheerio.load(html);
+      }
+    }
+  )
 }
 
 
