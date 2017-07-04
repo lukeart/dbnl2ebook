@@ -15,6 +15,7 @@
   "homepage": "https://github.com/lukeart/dbnl2ebook#readme",
   "dependencies": {
     "request": "latest",
-    "cheerio": "latest"
+    "cheerio": "latest",
+    "url": "latest"
   }
 }

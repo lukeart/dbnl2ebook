@@ -21,8 +21,12 @@ function mainloop(bookurl) {
   request(bookurl,
     function(error,response,html) {
       if (!error && response.statusCode == 200) {
-        console.log(html);
+        //console.log(html);
         var $ = cheerio.load(html);
+        $('a.head3').each(function(i, element){
+          var a = $(this);
+          console.log('Chapter: '+a.text()+' ('+a.attr('href')+')');
+        });
       }
     }
   )
