@@ -1,10 +1,16 @@
-//var he = require('he');
-var Xray = require('x-ray');
+const request = require('request');
+const cheerio = require('cheerio');
 var URL = require('url');
 
-var x = Xray();
-
-function scrapePage(url) {
+function scrapePage(pageurl) {
+  request(bookurl,
+    function(error,response,html) {
+      if (!error && response.statusCode == 200) {
+        //console.log(html);
+        var $ = cheerio.load(html);
+      }
+    }
+  )
 }
 
 function mainloop(bookurl) {
@@ -19,12 +25,32 @@ function mainloop(bookurl) {
     console.log("Incorrect parameters");
     exit(1);
   }
+  var bookbaseurl = bookurl;
+/*
+  if (myurl.href.endsWith('index.php')) {
+    bookbaseurl = URL.resolve(bookurl,'');
+  } else {
+    bookbaseurl = bookurl;
+  }
+*/
+  console.log(bookbaseurl);
 
-  x(bookurl,'article',[{
-    text: '#tekst_en_noten@html'
-  }])(function(err,obj) {
-    console.log(obj[0].text);
-  })
+  request(bookurl,
+    function(error,response,html) {
+      if (!error && response.statusCode == 200) {
+        //console.log(html);
+        var $ = cheerio.load(html);
+        $('a.head3').each(function(i, element){
+          var a = $(this);
+          var chaptertitle = a.text();
+          var chapterpage = a.attr('href');
+          console.log('Chapter: '+chaptertitle+' ('+chapterpage+')');
+          var chapterurl = URL.resolve(bookbaseurl,chapterpage);
+          console.log(chapterurl);
+        });
+      }
+    }
+  )
 }
 
 
